@@ -13,7 +13,11 @@ async function isSimulator(port) {
     const response = await fetch(`http://127.0.0.1:${port}/`, {
       signal: AbortSignal.timeout(500),
     });
-    return response.ok && (await response.text()).includes(marker);
+    if (!response.ok || !(await response.text()).includes(marker)) return false;
+    const catalog = await fetch(`http://127.0.0.1:${port}/api/local-exams`, {
+      signal: AbortSignal.timeout(1000),
+    });
+    return catalog.ok && Array.isArray((await catalog.json()).exams);
   } catch {
     return false;
   }

@@ -78,7 +78,7 @@ function attachMedia(files) {
     if (!/\.(png|jpe?g|webp|svg|gif|mp3|m4a|wav|ogg)$/i.test(file.name)) continue;
     const key = basename(file);
     const old = state.media.get(key);
-    if (old) URL.revokeObjectURL(old);
+    if (old?.startsWith('blob:')) URL.revokeObjectURL(old);
     const url = URL.createObjectURL(file);
     state.media.set(key, url);
     state.mediaUrls.push(url);
@@ -140,8 +140,58 @@ async function importFiles(fileList) {
   showHome();
   const missing = checkMissingAudio();
   dom.feedback.style.color = missing.length || mediaCheck.unmatched.length ? '#a36300' : '#246d23';
-  dom.feedback.textContent = `已导入「${exam.title}」及 ${mediaCount} 个素材。${missing.length ? `\n尚未找到音频：${missing.join('、')}。可在 Options 中补充，题目仍可预览。` : ''}${mediaCheck.unmatched.length ? `\n这些素材文件名没有对应的题号或 Part：${mediaCheck.unmatched.join('、')}。` : ''}`;
+  dom.feedback.textContent = `已导入「${exam.title}」及 ${mediaCount} 个素材。${missing.length ? `\n尚未找到音频：${missing.join('、')}。可在 Options 中补充，题目仍可作答。` : ''}${mediaCheck.unmatched.length ? `\n这些素材文件名没有对应的题号或 Part：${mediaCheck.unmatched.join('、')}。` : ''}`;
   renderCards();
+}
+
+async function loadLocalExam(folder) {
+  dom.feedback.textContent = '正在读取本地试卷…';
+  try {
+    const response = await fetch(`/api/local-exam?folder=${encodeURIComponent(folder)}`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const { exam, assets } = await response.json();
+    const errors = validateExam(exam);
+    if (errors.length) throw new Error(errors.join('；'));
+    const mediaCheck = inspectMediaNames(assets, exam);
+    if (mediaCheck.duplicates.length) throw new Error(`同名素材：${mediaCheck.duplicates.join('、')}`);
+    clearMedia();
+    state.sample = false;
+    state.exam = exam;
+    for (const asset of assets) state.media.set(asset.name.toLowerCase(), asset.url);
+    showHome();
+    const missing = checkMissingAudio();
+    dom.feedback.style.color = missing.length || mediaCheck.unmatched.length ? '#a36300' : '#246d23';
+    dom.feedback.textContent = `已读取「${exam.title}」及 ${assets.length} 个素材。${missing.length ? `\n暂无听力音频（${missing.join('、')}），可照常练习题目。` : ''}${mediaCheck.unmatched.length ? `\n未匹配素材：${mediaCheck.unmatched.join('、')}。` : ''}`;
+  } catch (error) {
+    dom.feedback.style.color = '#a0002f';
+    dom.feedback.textContent = `读取本地试卷失败：${error.message}`;
+  }
+}
+
+async function loadLocalCatalog() {
+  const status = $('local-status');
+  const list = $('local-exams');
+  status.textContent = '正在查找本地试卷…';
+  try {
+    const response = await fetch('/api/local-exams');
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const { exams } = await response.json();
+    list.replaceChildren();
+    status.textContent = exams.length ? `找到 ${exams.length} 套试卷，点击即可加载。` : '还没有找到试卷。请在“题目”文件夹中放入含 exam.json 的试卷目录。';
+    for (const item of exams) {
+      const card = el('button', 'local-exam');
+      card.type = 'button';
+      card.disabled = Boolean(item.error);
+      card.append(el('strong', '', item.title));
+      card.append(el('span', 'local-exam-path', item.folder));
+      card.append(el('small', '', item.error ? `格式错误：${item.error}`
+        : `${item.mediaCount} 个素材${item.missingAudio.length ? ' · 暂无完整听力音频' : ''}`));
+      if (!item.error) card.addEventListener('click', () => loadLocalExam(item.folder));
+      list.append(card);
+    }
+  } catch (error) {
+    status.textContent = `本地题库读取失败：${error.message}`;
+  }
 }
 
 async function loadExample() {
@@ -199,22 +249,31 @@ function openModule(kind) {
   state.questionId = module.parts[0].groups[0].questions[0].id;
   state.listeningStarted = false;
   loadProgress();
-  if (module.durationMinutes && !state.deadline) {
+  if (module.durationMinutes && !state.deadline && kind !== 'listening') {
     state.deadline = Date.now() + module.durationMinutes * 60000;
     saveProgress();
   }
   dom.home.hidden = true;
   dom.exam.hidden = false;
   dom.gate.hidden = kind !== 'listening';
+  if (kind === 'listening') {
+    const missing = checkMissingAudio();
+    $('audio-gate-message').textContent = missing.length
+      ? `这套试卷尚缺 ${missing.join('、')} 的音频。仍可进入题目作答，缺音频的 Part 不会播放声音。`
+      : '开始后将播放当前 Part 的音频，并显示题目。';
+    $('audio-play').textContent = missing.length === module.parts.length ? '无音频，开始练习'
+      : missing.length ? '开始练习' : 'Play · 开始';
+  }
   applyPrefs();
   renderPart();
-  startTimer();
+  if (kind === 'listening') dom.timer.hidden = true;
+  else startTimer();
 }
 
 function startTimer() {
   clearInterval(state.timerId);
-  dom.timer.hidden = !state.module?.durationMinutes;
-  if (!state.module?.durationMinutes) return;
+  dom.timer.hidden = !state.module?.durationMinutes || !state.deadline;
+  if (!state.module?.durationMinutes || !state.deadline) return;
   const tick = () => {
     const remain = Math.max(0, Math.ceil((state.deadline - Date.now()) / 1000));
     const mins = Math.floor(remain / 60);
@@ -326,7 +385,8 @@ function renderPart() {
     const single = el('div', 'single-layout');
     appendImages(single, part.id, 'passage-image');
     renderGroups(single, part);
-    if (!audioUrl(part.id)) single.append(el('p', 'audio-hint', `预览模式：未找到 ${part.id}.mp3 音频。`));
+    if (state.module.kind === 'listening' && !audioUrl(part.id))
+      single.append(el('p', 'audio-hint', `暂无 ${part.id} 音频；可以照常作答。`));
     dom.content.append(single);
   }
   renderFooter();
@@ -398,7 +458,7 @@ function renderInline(target, group) {
     if (!question) continue;
     const wrap = el('span', 'inline-answer');
     wrap.id = `q-${question.id}`;
-    wrap.append(el('span', 'inline-label', `${questionNumber(question.id)} `));
+    wrap.append(el('span', 'inline-label', `${questionNumber(question.id)}. `));
     wrap.append(createControl(question));
     body.append(wrap);
   }
@@ -410,7 +470,7 @@ function renderQuestion(target, question) {
   const item = el('div', `question${state.questionId === question.id ? ' is-active' : ''}`);
   item.id = `q-${question.id}`;
   const prompt = el('div', 'prompt');
-  prompt.append(el('span', 'q-number', String(questionNumber(question.id))));
+  prompt.append(el('span', 'q-number', `${questionNumber(question.id)}.`));
   prompt.append(el('span', '', question.prompt || ''));
   item.append(prompt);
   if (state.module.kind !== 'writing') appendImages(item, question.id);
@@ -637,6 +697,7 @@ $('choose-files').addEventListener('click', () => $('files-input').click());
 $('folder-input').addEventListener('change', event => importFiles(event.target.files));
 $('files-input').addEventListener('change', event => importFiles(event.target.files));
 $('load-example').addEventListener('click', loadExample);
+$('refresh-local').addEventListener('click', loadLocalCatalog);
 $('add-media').addEventListener('click', () => $('media-input').click());
 $('media-input').addEventListener('change', event => {
   const count = attachMedia([...event.target.files]);
@@ -649,6 +710,11 @@ $('media-input').addEventListener('change', event => {
 $('audio-play').addEventListener('click', () => {
   dom.gate.hidden = true;
   state.listeningStarted = true;
+  if (state.module.durationMinutes && !state.deadline) {
+    state.deadline = Date.now() + state.module.durationMinutes * 60000;
+    saveProgress();
+  }
+  startTimer();
   playPartAudio();
 });
 $('audio-back').addEventListener('click', showHome);
@@ -684,3 +750,4 @@ document.addEventListener('keydown', event => {
 });
 
 applyPrefs();
+loadLocalCatalog();

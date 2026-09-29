@@ -12,8 +12,14 @@
     <div class="home-top"><span class="logo">IELTS<span class="logo-mark">®</span></span><span class="home-kicker">机考界面模拟器</span></div>
     <div class="home-panel">
       <p class="eyebrow">本地练习</p>
-      <h1>导入试卷，进入机考界面</h1>
-      <p class="home-lede">题目保存在纯文字 <code>exam.json</code>。图表按题号命名，听力音频按 Part 命名；导入时自动关联。</p>
+      <h1>选择试卷，进入机考界面</h1>
+      <p class="home-lede">下方自动读取本机 <code>题目</code> 文件夹中的试卷和图片。听力音频尚未准备好时，也可以练习题目。</p>
+      <section class="local-library" aria-labelledby="local-library-title">
+        <div class="local-library-heading"><h2 id="local-library-title">本地题库</h2><button id="refresh-local" class="text-button" type="button">刷新列表</button></div>
+        <p id="local-status" class="muted" role="status" aria-live="polite">正在查找本地试卷…</p>
+        <div id="local-exams" class="local-exams"></div>
+      </section>
+      <p class="muted">也可以临时导入其他试卷：</p>
       <div class="home-actions">
         <button id="choose-folder" class="primary">导入试卷文件夹</button>
         <button id="choose-files" class="secondary">选择 JSON 与素材文件</button>
@@ -55,9 +61,9 @@
     <div class="dialog audio-dialog" role="dialog" aria-modal="true" aria-labelledby="audio-gate-title">
       <div class="audio-icon">♫</div>
       <h2 id="audio-gate-title">Listening test</h2>
-      <p>本模块包含音频。开始后，界面会显示当前 Part 的题目。</p>
-      <p class="muted">正式考试的音频不能暂停或倒回。这里的练习内容可随时重新进入。</p>
-      <button id="audio-play" class="primary">Play · 开始</button>
+      <p id="audio-gate-message">开始后，界面会显示当前 Part 的题目。</p>
+      <p class="muted">这里的练习内容可随时重新进入。</p>
+      <button id="audio-play" class="primary">开始听力练习</button>
       <button id="audio-back" class="text-button">返回选科</button>
     </div>
   </div>
