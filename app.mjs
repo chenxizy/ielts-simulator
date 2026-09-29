@@ -1,5 +1,6 @@
 import { MODULES, allQuestions, answerMatches, questionNumber, validateExam } from './schema.mjs';
 import { AUDIO_EXTENSIONS, IMAGE_EXTENSIONS, matchingAssetNames } from './media.mjs';
+import { restoredDeadline } from './timer.mjs';
 
 const $ = id => document.getElementById(id);
 const dom = {
@@ -46,7 +47,7 @@ function loadProgress() {
   state.flags = saved.flags && typeof saved.flags === 'object' ? saved.flags : {};
   state.notes = Array.isArray(saved.notes) ? saved.notes : [];
   state.highlights = Array.isArray(saved.highlights) ? saved.highlights : [];
-  state.deadline = Number.isFinite(saved.deadline) ? saved.deadline : null;
+  state.deadline = restoredDeadline(saved.deadline, state.module.durationMinutes);
 }
 
 function basename(file) { return file.name.toLowerCase(); }
@@ -177,7 +178,7 @@ async function loadLocalCatalog() {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const { exams } = await response.json();
     list.replaceChildren();
-    status.textContent = exams.length ? `找到 ${exams.length} 套试卷，点击即可加载。` : '还没有找到试卷。请在“题目”文件夹中放入含 exam.json 的试卷目录。';
+    status.textContent = exams.length ? `找到 ${exams.length} 套试卷，点击即可加载。` : '还没有找到试卷。请在本项目的“试题”文件夹中放入含 exam.json 的试卷目录。';
     for (const item of exams) {
       const card = el('button', 'local-exam');
       card.type = 'button';
@@ -272,6 +273,7 @@ function openModule(kind) {
 
 function startTimer() {
   clearInterval(state.timerId);
+  state.timerId = null;
   dom.timer.hidden = !state.module?.durationMinutes || !state.deadline;
   if (!state.module?.durationMinutes || !state.deadline) return;
   const tick = () => {
@@ -279,10 +281,21 @@ function startTimer() {
     const mins = Math.floor(remain / 60);
     const secs = remain % 60;
     dom.timer.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-    if (remain === 0) { clearInterval(state.timerId); toast('时间到，请检查答案'); showReview(); }
+    if (remain === 0) {
+      state.deadline = null;
+      saveProgress();
+      toast('时间到，请检查答案');
+      showReview();
+      return false;
+    }
+    return true;
   };
-  tick();
-  state.timerId = setInterval(tick, 1000);
+  if (tick()) state.timerId = setInterval(() => {
+    if (!tick()) {
+      clearInterval(state.timerId);
+      state.timerId = null;
+    }
+  }, 1000);
 }
 
 function stopAudio() {

@@ -17,7 +17,9 @@ async function isSimulator(port) {
     const catalog = await fetch(`http://127.0.0.1:${port}/api/local-exams`, {
       signal: AbortSignal.timeout(1000),
     });
-    return catalog.ok && Array.isArray((await catalog.json()).exams);
+    if (!catalog.ok) return false;
+    const body = await catalog.json();
+    return body.apiVersion === 2 && Array.isArray(body.exams);
   } catch {
     return false;
   }

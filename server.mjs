@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { listLocalExams } from './local-exams.mjs';
 
 const root = dirname(fileURLToPath(import.meta.url));
-const questionsRoot = resolve(process.env.IELTS_QUESTIONS_DIR || join(root, '..', '题目'));
+const questionsRoot = resolve(process.env.IELTS_QUESTIONS_DIR || join(root, '试题'));
 const port = Number(process.env.PORT || 4173);
 const types = {
   '.html': 'text/html; charset=utf-8',
@@ -36,7 +36,7 @@ createServer(async (req, res) => {
     const pathname = decodeURIComponent(url.pathname);
     if (pathname === '/api/local-exams') {
       const exams = await listLocalExams(questionsRoot);
-      sendJson(res, 200, { exams: exams.map(({ exam, assets, ...item }) => item) });
+      sendJson(res, 200, { apiVersion: 2, exams: exams.map(({ exam, assets, ...item }) => item) });
       return;
     }
     if (pathname === '/api/local-exam' || pathname === '/api/local-asset') {
