@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="240" viewBox="0 0 540 240">
+  <rect width="540" height="240" fill="#fcfcfa" stroke="#777"/>
+  <text x="270" y="26" text-anchor="middle" font-family="Arial" font-size="17" font-weight="700">Community garden plan</text>
+  <rect x="30" y="48" width="145" height="150" fill="#dce9cf" stroke="#789269"/><text x="102" y="126" text-anchor="middle" font-family="Arial" font-size="14">Trees</text>
+  <rect x="195" y="48" width="145" height="150" fill="#eee2c4" stroke="#9e8a61"/><text x="267" y="126" text-anchor="middle" font-family="Arial" font-size="14">Workshop space</text>
+  <rect x="360" y="48" width="145" height="150" fill="#d8e8f0" stroke="#7295a4"/><text x="432" y="120" text-anchor="middle" font-family="Arial" font-size="14">Monthly</text><text x="432" y="141" text-anchor="middle" font-family="Arial" font-size="14">?</text>
+  <text x="270" y="225" text-anchor="middle" font-family="Arial" font-size="12" fill="#555">Illustrative diagram for question R02</text>
+</svg>

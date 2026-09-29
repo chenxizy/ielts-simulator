@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>雅思机考界面模拟器</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style-overrides.css">
+</head>
+<body>
+  <main id="home" class="home">
+    <div class="home-top"><span class="logo">IELTS<span class="logo-mark">®</span></span><span class="home-kicker">机考界面模拟器</span></div>
+    <div class="home-panel">
+      <p class="eyebrow">本地练习</p>
+      <h1>导入试卷，进入机考界面</h1>
+      <p class="home-lede">题目保存在纯文字 <code>exam.json</code>。图表按题号命名，听力音频按 Part 命名；导入时自动关联。</p>
+      <div class="home-actions">
+        <button id="choose-folder" class="primary">导入试卷文件夹</button>
+        <button id="choose-files" class="secondary">选择 JSON 与素材文件</button>
+        <button id="load-example" class="text-button">查看内置示例</button>
+      </div>
+      <input id="folder-input" type="file" webkitdirectory directory hidden>
+      <input id="files-input" type="file" multiple hidden>
+      <div class="format-note">
+        <strong>固定文件名</strong>
+        <span><code>L-P1.mp3</code> 听力 Part 1 音频</span>
+        <span><code>R01.png</code> 阅读第 1 题图片</span>
+        <span><code>W01.png</code> 写作 Task 1 图表</span>
+        <span>图片也可用 jpg、webp 或 svg；同一题多张图用 <code>R01-2.png</code>。</span>
+      </div>
+      <div id="import-feedback" class="import-feedback" role="status" aria-live="polite"></div>
+    </div>
+    <div id="module-cards" class="module-cards" hidden></div>
+    <p class="home-footer">参考 <a href="https://ielts.idp.com/about/ielts-familiarisation-tests" target="_blank" rel="noopener">IDP</a> 与 <a href="https://www.ielts.org/take-a-test/test-types/ielts-academic-test/ielts-online" target="_blank" rel="noopener">IELTS 官方模拟器</a>的作答界面。</p>
+  </main>
+
+  <div id="exam" class="exam" hidden>
+    <header class="topbar">
+      <div class="brand-row"><span class="logo">IELTS<span class="logo-mark">®</span></span><div class="candidate"><strong>Test taker ID</strong><small id="audio-status"></small></div></div>
+      <div class="top-actions">
+        <span id="timer" class="timer" hidden></span>
+        <button id="messages-button" class="icon-button" type="button" title="状态" aria-label="状态">⌁</button>
+        <button id="options-button" class="icon-button" type="button" title="选项" aria-label="选项">☰</button>
+        <button id="notes-button" class="icon-button" type="button" title="笔记" aria-label="笔记">▣</button>
+      </div>
+    </header>
+    <div class="exam-main">
+      <div id="part-rubric" class="part-rubric"></div>
+      <div id="exam-content" class="exam-content"></div>
+    </div>
+    <footer id="exam-footer" class="exam-footer"></footer>
+  </div>
+
+  <div id="audio-gate" class="overlay" hidden>
+    <div class="dialog audio-dialog" role="dialog" aria-modal="true" aria-labelledby="audio-gate-title">
+      <div class="audio-icon">♫</div>
+      <h2 id="audio-gate-title">Listening test</h2>
+      <p>本模块包含音频。开始后，界面会显示当前 Part 的题目。</p>
+      <p class="muted">正式考试的音频不能暂停或倒回。这里的练习内容可随时重新进入。</p>
+      <button id="audio-play" class="primary">Play · 开始</button>
+      <button id="audio-back" class="text-button">返回选科</button>
+    </div>
+  </div>
+
+  <div id="options" class="overlay" hidden>
+    <div class="dialog options-dialog" role="dialog" aria-modal="true" aria-labelledby="options-title">
+      <div class="dialog-head"><h2 id="options-title">Options</h2><button id="options-close" class="close-button" aria-label="关闭">×</button></div>
+      <button id="review-from-options" class="option-link">检查并提交答案 <span>›</span></button>
+      <div class="option-section"><h3>Contrast</h3><div class="segmented" id="contrast-controls"><button data-contrast="normal">Black on white</button><button data-contrast="inverse">White on black</button><button data-contrast="yellow">Yellow on black</button></div></div>
+      <div class="option-section"><h3>Text size</h3><div class="segmented" id="size-controls"><button data-size="small">Small</button><button data-size="normal">Normal</button><button data-size="large">Large</button></div></div>
+      <button id="add-media" class="option-link">补充导入图片／音频 <span>›</span></button>
+      <input id="media-input" type="file" multiple hidden>
+      <button id="exit-test" class="option-link">返回试卷首页 <span>›</span></button>
+    </div>
+  </div>
+
+  <aside id="notes-panel" class="notes-panel" hidden>
+    <div class="dialog-head"><h2>Notes</h2><button id="notes-close" class="close-button" aria-label="关闭">×</button></div>
+    <p class="muted">当前模块的笔记会保存在此浏览器中。</p>
+    <textarea id="note-draft" placeholder="在这里记录要点…"></textarea>
+    <button id="save-note" class="primary">保存笔记</button>
+    <div id="note-list" class="note-list"></div>
+  </aside>
+
+  <div id="review" class="overlay" hidden>
+    <div class="dialog review-dialog" role="dialog" aria-modal="true" aria-labelledby="review-title">
+      <div class="dialog-head"><div><p class="eyebrow">Review your answers</p><h2 id="review-title">答题检查</h2></div><button id="review-close" class="close-button" aria-label="关闭">×</button></div>
+      <p id="review-summary"></p>
+      <div id="review-list" class="review-list"></div>
+      <div class="review-actions"><button id="review-return" class="secondary">返回继续作答</button><button id="review-score" class="primary">结束并查看结果</button></div>
+    </div>
+  </div>
+
+  <div id="result" class="overlay" hidden>
+    <div class="dialog result-dialog" role="dialog" aria-modal="true" aria-labelledby="result-title">
+      <div class="dialog-head"><h2 id="result-title">练习结果</h2><button id="result-close" class="close-button" aria-label="关闭">×</button></div>
+      <div id="result-body"></div>
+      <button id="result-home" class="primary">返回试卷首页</button>
+    </div>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "id": "example-practice",
+  "title": "机考界面示例试卷",
+  "testType": "academic",
+  "modules": [
+    {
+      "kind": "listening",
+      "durationMinutes": null,
+      "parts": [
+        {
+          "id": "L-P1",
+          "title": "Part 1",
+          "instructions": "Listen and answer questions 1–2.",
+          "groups": [
+            {
+              "title": "Questions 1–2",
+              "instructions": "Complete the notes. Write ONE WORD AND/OR A NUMBER for each answer.",
+              "layout": "inline",
+              "content": "Community centre booking\n\nRoom requested: {{L01}}\nNumber of guests: {{L02}}",
+              "questions": [
+                { "id": "L01", "type": "text", "answer": ["meeting room", "meeting"] },
+                { "id": "L02", "type": "text", "answer": "25" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "L-P2",
+          "title": "Part 2",
+          "instructions": "Listen and answer question 3.",
+          "groups": [
+            {
+              "title": "Question 3",
+              "instructions": "Choose the correct answer.",
+              "layout": "list",
+              "questions": [
+                { "id": "L03", "type": "single_choice", "prompt": "Where will the tour begin?", "options": ["At the station", "At the museum", "At the library"], "answer": "At the museum" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "L-P3",
+          "title": "Part 3",
+          "instructions": "Listen and answer question 4.",
+          "groups": [
+            {
+              "title": "Question 4",
+              "instructions": "Select the correct option.",
+              "layout": "list",
+              "questions": [
+                { "id": "L04", "type": "select", "prompt": "The main topic of the discussion is", "options": ["research methods", "course fees", "student housing"], "answer": "research methods" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "L-P4",
+          "title": "Part 4",
+          "instructions": "Listen and answer question 5.",
+          "groups": [
+            {
+              "title": "Question 5",
+              "instructions": "Choose TWO answers.",
+              "layout": "list",
+              "questions": [
+                { "id": "L05", "type": "multiple_choice", "prompt": "Which two factors are mentioned?", "options": ["Temperature", "Cost", "Distance", "Colour"], "maxChoices": 2, "answer": ["Temperature", "Distance"] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "reading",
+      "durationMinutes": null,
+      "parts": [
+        {
+          "id": "R-P1",
+          "title": "Part 1",
+          "instructions": "Read the text and answer questions 1–2.",
+          "passageTitle": "A garden for the neighbourhood",
+          "passage": "In 2015, residents of a small town turned an unused car park into a public garden. Volunteers planted trees and built paths so that people of all ages could use the space.\n\nThe project began with a local fundraising campaign. The council later provided tools and water. Today, the garden hosts weekend workshops and a monthly market.",
+          "groups": [
+            {
+              "title": "Question 1",
+              "instructions": "Choose TRUE, FALSE or NOT GIVEN.",
+              "layout": "list",
+              "questions": [
+                { "id": "R01", "type": "true_false_not_given", "prompt": "The garden was created on a former car park.", "answer": "TRUE" }
+              ]
+            },
+            {
+              "title": "Question 2",
+              "instructions": "Write ONE WORD ONLY.",
+              "layout": "list",
+              "questions": [
+                { "id": "R02", "type": "text", "prompt": "The diagram shows the area used for the monthly _____.", "answer": "market" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R-P2",
+          "title": "Part 2",
+          "instructions": "Read the text and answer questions 3–4.",
+          "passageTitle": "Birds and long journeys",
+          "passage": "Some birds travel thousands of kilometres every year. Researchers use small tracking devices to understand their routes.\n\nThe devices record location and movement. By comparing many journeys, scientists can identify places where birds stop to rest.",
+          "groups": [
+            {
+              "title": "Questions 3–4",
+              "instructions": "Complete the notes. Write ONE WORD ONLY from the text.",
+              "layout": "inline",
+              "content": "Researchers attach small {{R03}} devices to birds. The data can reveal places used for {{R04}}.",
+              "questions": [
+                { "id": "R03", "type": "text", "answer": "tracking" },
+                { "id": "R04", "type": "text", "answer": "rest" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R-P3",
+          "title": "Part 3",
+          "instructions": "Read the text and answer questions 5–6.",
+          "passageTitle": "Materials in modern buildings",
+          "passage": "Architects choose materials for strength, cost and environmental performance. Timber can store carbon while it remains in a building. Recycled metal can reduce demand for newly mined resources.\n\nThe best choice depends on local conditions. Transport distance and the expected life of the building both matter.",
+          "groups": [
+            {
+              "title": "Questions 5–6",
+              "instructions": "Choose the correct answer.",
+              "layout": "list",
+              "questions": [
+                { "id": "R05", "type": "select", "prompt": "Which material can store carbon?", "options": ["Timber", "Glass", "Concrete"], "answer": "Timber" },
+                { "id": "R06", "type": "multiple_choice", "prompt": "Which TWO factors affect the choice?", "options": ["Transport distance", "Local conditions", "Wall colour", "Room name"], "maxChoices": 2, "answer": ["Transport distance", "Local conditions"] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "writing",
+      "durationMinutes": null,
+      "parts": [
+        {
+          "id": "W-P1",
+          "title": "Part 1",
+          "instructions": "You should spend about 20 minutes on this task. Write at least 150 words.",
+          "passage": "The chart below shows the number of people taking part in three activities in 2000 and 2020.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+          "groups": [
+            { "title": "Task 1", "instructions": "Write your answer in the box on the right.", "layout": "list", "questions": [
+              { "id": "W01", "type": "essay", "prompt": "Describe the chart." }
+            ] }
+          ]
+        },
+        {
+          "id": "W-P2",
+          "title": "Part 2",
+          "instructions": "You should spend about 40 minutes on this task. Write at least 250 words.",
+          "passage": "Some people believe that public transport should be free in large cities. Others argue that users should pay the full cost.\n\nDiscuss both views and give your own opinion.",
+          "groups": [
+            { "title": "Task 2", "instructions": "Write your answer in the box on the right.", "layout": "list", "questions": [
+              { "id": "W02", "type": "essay", "prompt": "Discuss both views and give your opinion." }
+            ] }
+          ]
+        }
+      ]
+    }
+  ]
+}

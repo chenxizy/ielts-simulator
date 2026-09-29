@@ -1,0 +1,3 @@
+.writing-pane { padding-top: 16px !important; }
+.writing-pane .group-title,
+.writing-pane .group-instructions { display: none; }

@@ -1,0 +1,534 @@
+{
+  "schemaVersion": 1,
+  "id": "my-ielts-mock-001",
+  "title": "我的雅思模拟试卷 001",
+  "testType": "academic",
+  "modules": [
+    {
+      "kind": "listening",
+      "durationMinutes": null,
+      "parts": [
+        {
+          "id": "L-P1",
+          "title": "Part 1",
+          "instructions": "[填写听力 Part 1 指令]",
+          "groups": [
+            {
+              "title": "Questions 1–10",
+              "instructions": "[填写本题组答题说明]",
+              "layout": "inline",
+              "content": "L01：{{L01}}\nL02：{{L02}}\nL03：{{L03}}\nL04：{{L04}}\nL05：{{L05}}\nL06：{{L06}}\nL07：{{L07}}\nL08：{{L08}}\nL09：{{L09}}\nL10：{{L10}}",
+              "questions": [
+                {
+                  "id": "L01",
+                  "type": "text"
+                },
+                {
+                  "id": "L02",
+                  "type": "text"
+                },
+                {
+                  "id": "L03",
+                  "type": "text"
+                },
+                {
+                  "id": "L04",
+                  "type": "text"
+                },
+                {
+                  "id": "L05",
+                  "type": "text"
+                },
+                {
+                  "id": "L06",
+                  "type": "text"
+                },
+                {
+                  "id": "L07",
+                  "type": "text"
+                },
+                {
+                  "id": "L08",
+                  "type": "text"
+                },
+                {
+                  "id": "L09",
+                  "type": "text"
+                },
+                {
+                  "id": "L10",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "L-P2",
+          "title": "Part 2",
+          "instructions": "[填写听力 Part 2 指令]",
+          "groups": [
+            {
+              "title": "Questions 11–20",
+              "instructions": "[填写本题组答题说明]",
+              "layout": "inline",
+              "content": "L11：{{L11}}\nL12：{{L12}}\nL13：{{L13}}\nL14：{{L14}}\nL15：{{L15}}\nL16：{{L16}}\nL17：{{L17}}\nL18：{{L18}}\nL19：{{L19}}\nL20：{{L20}}",
+              "questions": [
+                {
+                  "id": "L11",
+                  "type": "text"
+                },
+                {
+                  "id": "L12",
+                  "type": "text"
+                },
+                {
+                  "id": "L13",
+                  "type": "text"
+                },
+                {
+                  "id": "L14",
+                  "type": "text"
+                },
+                {
+                  "id": "L15",
+                  "type": "text"
+                },
+                {
+                  "id": "L16",
+                  "type": "text"
+                },
+                {
+                  "id": "L17",
+                  "type": "text"
+                },
+                {
+                  "id": "L18",
+                  "type": "text"
+                },
+                {
+                  "id": "L19",
+                  "type": "text"
+                },
+                {
+                  "id": "L20",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "L-P3",
+          "title": "Part 3",
+          "instructions": "[填写听力 Part 3 指令]",
+          "groups": [
+            {
+              "title": "Questions 21–30",
+              "instructions": "[填写本题组答题说明]",
+              "layout": "inline",
+              "content": "L21：{{L21}}\nL22：{{L22}}\nL23：{{L23}}\nL24：{{L24}}\nL25：{{L25}}\nL26：{{L26}}\nL27：{{L27}}\nL28：{{L28}}\nL29：{{L29}}\nL30：{{L30}}",
+              "questions": [
+                {
+                  "id": "L21",
+                  "type": "text"
+                },
+                {
+                  "id": "L22",
+                  "type": "text"
+                },
+                {
+                  "id": "L23",
+                  "type": "text"
+                },
+                {
+                  "id": "L24",
+                  "type": "text"
+                },
+                {
+                  "id": "L25",
+                  "type": "text"
+                },
+                {
+                  "id": "L26",
+                  "type": "text"
+                },
+                {
+                  "id": "L27",
+                  "type": "text"
+                },
+                {
+                  "id": "L28",
+                  "type": "text"
+                },
+                {
+                  "id": "L29",
+                  "type": "text"
+                },
+                {
+                  "id": "L30",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "L-P4",
+          "title": "Part 4",
+          "instructions": "[填写听力 Part 4 指令]",
+          "groups": [
+            {
+              "title": "Questions 31–40",
+              "instructions": "[填写本题组答题说明]",
+              "layout": "inline",
+              "content": "L31：{{L31}}\nL32：{{L32}}\nL33：{{L33}}\nL34：{{L34}}\nL35：{{L35}}\nL36：{{L36}}\nL37：{{L37}}\nL38：{{L38}}\nL39：{{L39}}\nL40：{{L40}}",
+              "questions": [
+                {
+                  "id": "L31",
+                  "type": "text"
+                },
+                {
+                  "id": "L32",
+                  "type": "text"
+                },
+                {
+                  "id": "L33",
+                  "type": "text"
+                },
+                {
+                  "id": "L34",
+                  "type": "text"
+                },
+                {
+                  "id": "L35",
+                  "type": "text"
+                },
+                {
+                  "id": "L36",
+                  "type": "text"
+                },
+                {
+                  "id": "L37",
+                  "type": "text"
+                },
+                {
+                  "id": "L38",
+                  "type": "text"
+                },
+                {
+                  "id": "L39",
+                  "type": "text"
+                },
+                {
+                  "id": "L40",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "reading",
+      "durationMinutes": null,
+      "parts": [
+        {
+          "id": "R-P1",
+          "title": "Part 1",
+          "instructions": "[填写阅读 Part 1 指令]",
+          "passageTitle": "[填写文章标题]",
+          "passage": "[填写文章第一段。]\n\n[填写文章第二段。]",
+          "groups": [
+            {
+              "title": "Questions 1–13",
+              "instructions": "[填写本题组答题说明]",
+              "layout": "list",
+              "questions": [
+                {
+                  "id": "R01",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R02",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R03",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R04",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R05",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R06",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R07",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R08",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R09",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R10",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R11",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R12",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R13",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R-P2",
+          "title": "Part 2",
+          "instructions": "[填写阅读 Part 2 指令]",
+          "passageTitle": "[填写文章标题]",
+          "passage": "[填写文章第一段。]\n\n[填写文章第二段。]",
+          "groups": [
+            {
+              "title": "Questions 14–26",
+              "instructions": "[填写本题组答题说明]",
+              "layout": "list",
+              "questions": [
+                {
+                  "id": "R14",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R15",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R16",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R17",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R18",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R19",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R20",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R21",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R22",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R23",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R24",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R25",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R26",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R-P3",
+          "title": "Part 3",
+          "instructions": "[填写阅读 Part 3 指令]",
+          "passageTitle": "[填写文章标题]",
+          "passage": "[填写文章第一段。]\n\n[填写文章第二段。]",
+          "groups": [
+            {
+              "title": "Questions 27–40",
+              "instructions": "[填写本题组答题说明]",
+              "layout": "list",
+              "questions": [
+                {
+                  "id": "R27",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R28",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R29",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R30",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R31",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R32",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R33",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R34",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R35",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R36",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R37",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R38",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R39",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                },
+                {
+                  "id": "R40",
+                  "type": "text",
+                  "prompt": "[填写题干]"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "writing",
+      "durationMinutes": null,
+      "parts": [
+        {
+          "id": "W-P1",
+          "title": "Part 1",
+          "instructions": "You should spend about 20 minutes on this task. Write at least 150 words.",
+          "passage": "[填写写作题目文字。若有图表，把图片命名为 W01.png 或 W02.png。]",
+          "groups": [
+            {
+              "title": "Task 1",
+              "instructions": "Write your answer in the box on the right.",
+              "layout": "list",
+              "questions": [
+                {
+                  "id": "W01",
+                  "type": "essay",
+                  "prompt": "[填写简短题目名称]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "W-P2",
+          "title": "Part 2",
+          "instructions": "You should spend about 40 minutes on this task. Write at least 250 words.",
+          "passage": "[填写写作题目文字。若有图表，把图片命名为 W01.png 或 W02.png。]",
+          "groups": [
+            {
+              "title": "Task 2",
+              "instructions": "Write your answer in the box on the right.",
+              "layout": "list",
+              "questions": [
+                {
+                  "id": "W02",
+                  "type": "essay",
+                  "prompt": "[填写简短题目名称]"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

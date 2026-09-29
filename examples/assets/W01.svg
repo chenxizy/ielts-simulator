@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="365" viewBox="0 0 620 365">
+  <rect width="620" height="365" fill="white"/>
+  <text x="310" y="35" text-anchor="middle" font-family="Arial" font-size="20" font-weight="700">Participation in three activities</text>
+  <text x="310" y="59" text-anchor="middle" font-family="Arial" font-size="14">2000 and 2020 (thousands)</text>
+  <g stroke="#bbb" stroke-width="1"><line x1="70" y1="90" x2="570" y2="90"/><line x1="70" y1="145" x2="570" y2="145"/><line x1="70" y1="200" x2="570" y2="200"/><line x1="70" y1="255" x2="570" y2="255"/><line x1="70" y1="310" x2="570" y2="310"/></g>
+  <g font-family="Arial" font-size="12" fill="#444"><text x="42" y="315">0</text><text x="35" y="260">10</text><text x="35" y="205">20</text><text x="35" y="150">30</text><text x="35" y="95">40</text><text x="140" y="335">Cycling</text><text x="295" y="335">Swimming</text><text x="455" y="335">Running</text></g>
+  <g fill="#343434"><rect x="139" y="200" width="30" height="110"/><rect x="299" y="145" width="30" height="165"/><rect x="459" y="228" width="30" height="82"/></g>
+  <g fill="#969696"><rect x="173" y="117" width="30" height="193"/><rect x="333" y="173" width="30" height="137"/><rect x="493" y="90" width="30" height="220"/></g>
+  <rect x="215" y="348" width="15" height="10" fill="#343434"/><text x="236" y="358" font-family="Arial" font-size="12">2000</text><rect x="310" y="348" width="15" height="10" fill="#969696"/><text x="331" y="358" font-family="Arial" font-size="12">2020</text>
+</svg>
